@@ -1,2 +1,74 @@
-<p>add works!</p>
-<pre>{{ heroe | json }}</pre>
+<h1>
+  {{ heroe.id ? "Edit" : "New" }} Heroe <small>{{ heroe.superhero }}</small>
+</h1>
+
+<div fxLayout="row" fxLayoutGap="40px" fxLayout.xs="column">
+  <div fxFlex="50" fxLayout="column">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
+      <mat-form-field fxFlex="100" fxLayout.xs="column">
+        <mat-label>Super Heroe</mat-label>
+        <input type="text" matInput required [(ngModel)]="heroe.superhero" />
+      </mat-form-field>
+
+      <mat-form-field fxFlex="100">
+        <mat-label>Alter Ego</mat-label>
+        <input type="text" matInput required [(ngModel)]="heroe.alter_ego" />
+      </mat-form-field>
+    </div>
+
+    <mat-form-field>
+      <mat-label>First Appearance</mat-label>
+      <input
+        type="text"
+        matInput
+        required
+        [(ngModel)]="heroe.first_appearance"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Characters</mat-label>
+      <input type="text" matInput required [(ngModel)]="heroe.characters" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Publisher</mat-label>
+      <mat-select required [(ngModel)]="heroe.publisher">
+        <mat-option *ngFor="let publisher of publishers" [value]="publisher.id">
+          {{ publisher.desc }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Photo</mat-label>
+      <input type="url" [(ngModel)]="heroe.alt_img" matInput required />
+    </mat-form-field>
+
+    <br />
+
+    <div fxLayout>
+      <button mat-raised-button color="primary" (click)="save()">
+        <mat-icon *ngIf="heroe.id">edit</mat-icon>
+        <mat-icon *ngIf="!heroe.id">save</mat-icon>
+
+        {{ heroe.id ? "Edit" : "Save" }}
+      </button>
+
+      <span class="spacer"></span>
+
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="delete()"
+        *ngIf="heroe.id"
+      >
+        <mat-icon>delete</mat-icon>
+        Delete
+      </button>
+    </div>
+  </div>
+  <div fxFlex="50">
+    <img [src]="heroe | image" />
+  </div>
+</div>
