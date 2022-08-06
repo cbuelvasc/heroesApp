@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { SigninComponent } from './pages/signin/signin.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { SignoutComponent } from './pages/signout/signout.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,10 @@ const routes: Routes = [
       {
         path: 'signup',
         component: SignupComponent,
+      },
+      {
+        path: 'signout',
+        component: SignoutComponent,
       },
       {
         path: '**',
